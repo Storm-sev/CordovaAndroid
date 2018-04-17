@@ -43,15 +43,11 @@ public abstract class BaseFragment extends Fragment implements CordovaInterface{
      */
     protected Unbinder unbinder;
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.mContext = context;
     }
-
-
-
 
 
     @Nullable

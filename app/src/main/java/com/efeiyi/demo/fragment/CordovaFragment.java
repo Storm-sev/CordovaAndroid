@@ -35,17 +35,16 @@ public class CordovaFragment extends Fragment implements CordovaInterface {
 
     public static final String TAG = CordovaFragment.class.getSimpleName();
 
-
     private Context mContext;
 
     private View mRootView;
     private SystemWebView webView;
-    private CordovaWebView mWebView;
-    private ConfigXmlParser parser;
+    private CordovaWebView mWebView;                        // 增强版WebView;
+    private ConfigXmlParser parser;                         // 文件解析
     private CordovaPreferences preferences;
-    private ArrayList<PluginEntry> pluginEntries;
+    private ArrayList<PluginEntry> pluginEntries;           //　插件的集合
     private String launchUrl;
-    private MyCordovaInterfaceImpl mCordovaInterface;
+    private MyCordovaInterfaceImpl mCordovaInterfaceImpl;   // 具体实现 原生和js 的交互
 
 
     /**
@@ -78,7 +77,7 @@ public class CordovaFragment extends Fragment implements CordovaInterface {
 
         parser.parse(mContext);
 
-        mCordovaInterface = new MyCordovaInterfaceImpl(getActivity());
+        mCordovaInterfaceImpl = new MyCordovaInterfaceImpl(getActivity());
 
     }
 
@@ -95,7 +94,7 @@ public class CordovaFragment extends Fragment implements CordovaInterface {
             //构建 CordovaWebView
             mWebView = new CordovaWebViewImpl(new SystemWebViewEngine(webView));
 //            mWebView.init(new CordovaInterfaceImpl(this.getActivity()), parser.getPluginEntries(), preferences);
-            mWebView.init(mCordovaInterface,parser.getPluginEntries(),preferences);
+            mWebView.init(mCordovaInterfaceImpl,parser.getPluginEntries(),preferences);
         }
         return mRootView;
     }
@@ -133,14 +132,6 @@ public class CordovaFragment extends Fragment implements CordovaInterface {
 
     protected boolean activityResultKeepRunning;
 
-
-//    @Override
-//    public void startActivityForResult(Intent intent, int requestCode) {
-//        super.startActivityForResult(intent, requestCode);
-//        LogUtils.d(TAG,"CordovaFragment   startActivityForResult : " + requestCode);
-//    }
-
-
     /**
      *
      */
@@ -160,7 +151,7 @@ public class CordovaFragment extends Fragment implements CordovaInterface {
 
 
     /**
-     *
+     *  返回的结果.
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -172,7 +163,7 @@ public class CordovaFragment extends Fragment implements CordovaInterface {
         if (plugin != null) {
             plugin.onActivityResult(requestCode, resultCode, data);
         }
-        mCordovaInterface.onActivityResult(requestCode, resultCode,data);
+        mCordovaInterfaceImpl.onActivityResult(requestCode, resultCode,data);
     }
 
     @Override

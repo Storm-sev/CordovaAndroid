@@ -64,7 +64,7 @@
                     alert('camera:')
                 }
                 //拍照并获取Base64编码的图像（quality : 存储图像的质量，范围是[0,100]）
-                navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+                navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 100,
                                             destinationType: destinationType.DATA_URL }
                                             );
             }
@@ -103,7 +103,7 @@
     </button>
     <br>
 
-    <p id="demo">测试专用 </p>
+    <p id="demo">测试专用</p>
     <img style="display:none;width:240px; height:320px" id="smallImage" src=""/>
 
     <div id="deviceready" class="blink">

@@ -8,7 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 
 import com.efeiyi.demo.R;
-import com.efeiyi.demo.fragment.CordovaFragment;
+import com.efeiyi.demo.fragment.BaseFragment;
+import com.efeiyi.demo.fragment.PersonFragment;
 import com.efeiyi.demo.utils.LogUtils;
 
 import butterknife.BindView;
@@ -21,7 +22,7 @@ public class Main2Activity extends FragmentActivity {
 
     @BindView(R.id.fl_main)
     FrameLayout flMain;
-    private CordovaFragment fragment;
+    private BaseFragment fragment;
 
 
     @Override
@@ -40,7 +41,8 @@ public class Main2Activity extends FragmentActivity {
         //MainFragment fragment = MainFragment.newInstance();
         //  HomeFragment fragment = HomeFragment.newInstance();
 
-        fragment = CordovaFragment.NewInstance();
+       // fragment = CordovaFragment.NewInstance();
+        fragment = PersonFragment.NewInstance();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 

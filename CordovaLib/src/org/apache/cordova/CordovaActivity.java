@@ -48,9 +48,9 @@ import java.util.Locale;
  * This class is the main Android activity that represents the Cordova
  * application. It should be extended by the user to load the specific
  * html file that contains the application.
- *
+ * <p>
  * As an example:
- *
+ * <p>
  * <pre>
  *     package org.apache.cordova.examples;
  *
@@ -67,13 +67,12 @@ import java.util.Locale;
  *       }
  *     }
  * </pre>
- *
+ * <p>
  * Cordova xml configuration: Cordova uses a configuration file at
  * res/xml/config.xml to specify its settings. See "The config.xml File"
  * guide in cordova-docs at http://cordova.apache.org/docs for the documentation
  * for the configuration. The use of the set*Property() methods is
  * deprecated in favor of the config.xml file.
- *
  */
 public class CordovaActivity extends Activity {
     public static String TAG = "CordovaActivity";
@@ -185,8 +184,7 @@ public class CordovaActivity extends Activity {
                 int backgroundColor = preferences.getInteger("BackgroundColor", Color.BLACK);
                 // Background of activity:
                 appView.getView().setBackgroundColor(backgroundColor);
-            }
-            catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }
@@ -339,7 +337,7 @@ public class CordovaActivity extends Activity {
     @SuppressLint("NewApi")
     @Override
     public void startActivityForResult(Intent intent, int requestCode, Bundle options) {
-        Log.d("activity","调用插件的时候执行的方法 startActivityForResult" );
+        Log.d("activity", "调用插件的时候执行的方法 startActivityForResult");
         // Capture requestCode here so that it is captured in the setActivityResultCallback() case.
         cordovaInterface.setActivityResultRequestCode(requestCode);
         super.startActivityForResult(intent, requestCode, options);
@@ -356,7 +354,7 @@ public class CordovaActivity extends Activity {
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        Log.d("activity","调用插件的时候执行的方法 onActivityResult" );
+        Log.d("activity", "调用插件的时候执行的方法 onActivityResult");
 
         LOG.d(TAG, "Incoming Result. Request code = " + requestCode);
         super.onActivityResult(requestCode, resultCode, intent);
@@ -465,13 +463,13 @@ public class CordovaActivity extends Activity {
      * @return Object or null
      */
     public Object onMessage(String id, Object data) {
-        Log.d("activity","调用相机的时候执行这个方法" + id + "data: " + data.toString());
+        Log.d("activity", "调用相机的时候执行这个方法" + id + "data: " + data.toString());
         if ("onReceivedError".equals(id)) {
             JSONObject d = (JSONObject) data;
             try {
                 this.onReceivedError(d.getInt("errorCode"), d.getString("description"), d.getString("url"));
 
-                LOG.d("plugin","获取相机插件的名字地址 : "  + d.getString("url"));
+                LOG.d("plugin", "获取相机插件的名字地址 : " + d.getString("url"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -513,12 +511,9 @@ public class CordovaActivity extends Activity {
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[],
                                            int[] grantResults) {
-        try
-        {
+        try {
             cordovaInterface.onRequestPermissionResult(requestCode, permissions, grantResults);
-        }
-        catch (JSONException e)
-        {
+        } catch (JSONException e) {
             LOG.d(TAG, "JSONException: Parameters fed into the method are not valid");
             e.printStackTrace();
         }
